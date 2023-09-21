@@ -9,7 +9,7 @@ processor,model = load_processor_and_model()
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model.to(device)
 
-@st.cache_data
+#@st.cache_data
 def generate_result(user_question,_image):
     # Prepare the question prompt
     task_prompt = f"<s_docvqa><s_question>{user_question}</s_question><s_answer>"
