@@ -4,7 +4,7 @@ import json
 import os
 from PIL import Image
 from utils.text_getter import generate_result
-from utils.list_of_fileds_question import fields_questions_list
+from utils.list_of_fileds_question import fields_questions_list_for_invoice
 
 # setting up the side bar for image upload.
 st.sidebar.title('Upload Invoice Image')
@@ -39,7 +39,7 @@ if uploaded_image is not None:
     # setting up the form in sidebar for feilds to be extracted.
     with st.form(key ='Form1'):
         with st.sidebar:
-            for field,question in fields_questions_list.items():
+            for field,question in fields_questions_list_for_invoice.items():
                 st.sidebar.checkbox(field)
             submit = st.form_submit_button(label='Extract Fields',type='primary')
             
@@ -47,7 +47,7 @@ if uploaded_image is not None:
             col2.subheader('Extracted Details')
             col2.markdown('-----------')
 
-            for field,question in fields_questions_list.items():
+            for field,question in fields_questions_list_for_invoice.items():
                 user_question = question
                 answer = str.upper(generate_result(user_question,image))
                 col2.text_input(field,value=answer)
