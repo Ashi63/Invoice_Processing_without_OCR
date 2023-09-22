@@ -43,7 +43,11 @@ def classification_page():
         success_msg.empty()
         
         
-        if st.sidebar.button('Click here to Classify the image',type='primary'):
+        button_placeholder = st.sidebar.empty()
+        show_button = button_placeholder.button("Click to classify the image",type='primary')
+        
+        if show_button:
+        
             col2.subheader('Image Classified As')
             col2.markdown('-----------')
             
@@ -79,12 +83,15 @@ def classification_page():
             col2.text_input(label='Confidence of Predicted Class',value=f"{confidence_score_classify:.2f}")
             # Update session state with class_name
             st.session_state.class_name = class_name
-            col2.success(f'Image Class Predicted as: "{st.session_state.class_name}". \n\n Go ahead and extract the details.')
-    
+            st.sidebar.success(f'Image Class Predicted as: "{st.session_state.class_name}". \n\n Go ahead and extract the details.')
+            # Clear the button_placeholder to remove the button    
+            button_placeholder.empty()
+            
 # Text Extraction Page
 def text_extraction_page():
     st.title("Text Extraction Page")
     st.write("Extract text from the classified image here.")
+    st.divider()
     #uploaded_image = st.file_uploader('Upload Image Document',type=['jpg','jpeg','png'])
     st.sidebar.divider()
 
@@ -124,13 +131,15 @@ def text_extraction_page():
                         answer = str.upper(generate_result(user_question,image))
                         col2.text_input(field,value=answer)
                         extracted_data[field] = answer 
+                    
+                    st.success("Fields extracted successfully!")
                                         
                     # After the form submission, you can convert the extracted_data dictionary to JSON
                     if extracted_data:
                         extracted_data_json = json.dumps(extracted_data, indent=4)
                         st.write("Extracted Data (JSON format):")
                         st.code(extracted_data_json)
-                    
+                                            
                     # make extracted_data folder for saving the extracted data from image
                     if 'extracted_data' not in os.listdir():
                         os.makedirs('extracted_data',exist_ok=True)
@@ -140,6 +149,7 @@ def text_extraction_page():
                         json.dump(extracted_data, json_file, indent=4)
 
                     st.success("Extracted data saved to 'extracted_data.json'")    
+                    
         elif st.session_state.class_name == 'Restaurant_Bill':
             # after uploading image successfully show the fields to be extracted from side bar
             st.sidebar.subheader('Select the fiels to be extracted.')
