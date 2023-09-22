@@ -5,6 +5,7 @@ import os
 from PIL import Image
 from utils.text_getter import generate_result
 from utils.list_of_fileds_question import fields_questions_list_for_invoice
+from utils.invoice_classification import class_name_classify,confidence_score_classify
 
 # setting up the side bar for image upload.
 st.sidebar.title('Upload Invoice Image')
