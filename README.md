@@ -5,9 +5,9 @@ Invoice Processing without OCR with help of  donut implementation.
 
 2. Create a virtual environment and activate the virtual environment.
     
-    - python -m venv '<environment name>'
+    - python -m venv 'environment_name'
     
-    - source '<environment name>'/Script/activate
+    - source 'environment_name'/Script/activate
 
 2. Install all the packages needed for the requirements.txt
     
