@@ -2,7 +2,7 @@ from utils.load_model import load_processor_and_model
 import torch
 import streamlit as st
 
-
+# loading the processor and model from utils load models
 processor,model = load_processor_and_model()
 
 # Set up device
@@ -34,7 +34,3 @@ def generate_result(user_question,_image):
     seq = processor.batch_decode(outputs.sequences)[0]
     answer = seq.split("<s_answer>")[-1].strip("</s_answer>")
     return answer
-
-
-
-

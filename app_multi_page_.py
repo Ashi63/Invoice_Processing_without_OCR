@@ -15,14 +15,14 @@ if 'class_name' not in st.session_state:
 if 'uploaded_image' not in st.session_state:
     st.session_state.uploaded_image = None
 
-# Home Page
+# For Home Page
 def home_page():
     st.title("Automate Invoice Processing.")
     st.divider()
     #st.write("Welcome to Invoice Processing Application")
     st.success("Welcome to Invoice Processing Application.\n\n -- Application will first classify the image type and accordingly populate the feilds for extracting details. \n\n Select from page option in sidebar.\n  - 'Classification' page to classify the image type. \n\n - 'Text Extraction' for extracting details.")
 
-# Classification Page
+# For Classification Page
 def classification_page():
     st.title("Invoice Classification Page")
     st.write("Upload an image for classification here.")
@@ -76,7 +76,7 @@ def classification_page():
             class_name_classify = class_names[index_classify]
             confidence_score_classify = prediction_classify[0][index_classify]
             # Display the classification prediction and confidence score
-            #st.subheader("Image Classification Prediction:")
+            # st.subheader("Image Classification Prediction:")
             col2.text_input(label='Image Class Prediction',value=f"{class_name_classify[2:]}")
             #global class_name
             class_name = f"{class_name_classify[2:]}"
@@ -87,7 +87,7 @@ def classification_page():
             # Clear the button_placeholder to remove the button    
             button_placeholder.empty()
             
-# Text Extraction Page
+# For Text Extraction Page
 def text_extraction_page():
     st.title("Text Extraction Page")
     st.write("Extract text from the classified image here.")
@@ -108,6 +108,7 @@ def text_extraction_page():
         success_msg.empty()
         
         image = Image.open(st.session_state.uploaded_image)
+        # if class name is invoice below functionality will be triggered
         if st.session_state.class_name == 'Invoices':
             # after uploading image successfully show the fields to be extracted from side bar
             st.sidebar.subheader('Select the fiels to be extracted.')
@@ -191,6 +192,7 @@ def text_extraction_page():
                     st.success("Extracted data saved to 'extracted_data.json'")                
         else:
             st.warning('Image uploaded is not in identified format. We are working on it.')   
+
 
 # Main App
 def main():
